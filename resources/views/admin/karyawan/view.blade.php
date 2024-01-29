@@ -1,0 +1,64 @@
+@extends('admin.layout.index')
+@section('content')
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>DATA KARYAWAN</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
+                <li class="breadcrumb-item active">Data Karyawan</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tabel Karyawan</h5>
+
+                        <!-- Default Table -->
+                        <table class="table" style="vertical-align: middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nama Karyawan</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Nomor Telepon</th>
+                                    <th scope="col">Alamat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dataKaryawan as $item)
+                                <tr>
+                                    <th>{{ $no++ }}.</th>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->nomor_telepon }}</td>
+                                    <td>{{ $item->alamat }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <!-- End Default Table Example -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Mendengarkan perubahan pada elemen select
+    document.querySelectorAll('[id^="jabatanSelect"]').forEach((select) => {
+        select.addEventListener('change', function() {
+            const formId = this.id.replace('jabatanSelect', 'updateForm');
+            document.getElementById(formId).submit(); // Mengirimkan formulir saat perubahan terjadi
+        });
+    });
+</script>
+@endsection
